@@ -1,5 +1,6 @@
 package com.mca.recyclertwo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     EmployeeInfo employeeInfo;
-
+    Button showDatabtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         employeePhoneEdt = findViewById(R.id.idEdtEmployeePhoneNumber);
         employeeAddressEdt = findViewById(R.id.idEdtEmployeeAddress);
         sendDatabtn = findViewById(R.id.idBtnSendData);
-
+        showDatabtn=findViewById(R.id.showDataBtn);
         // Getting instance of Firebase database
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing employeeInfo object
         employeeInfo = new EmployeeInfo();
+
 
         // Setting OnClickListener to send data button
         sendDatabtn.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        showDatabtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity2.class));
+            }
+        });
+
     }
 
     private void addDatatoFirebase(String name, String phone, String address) {
